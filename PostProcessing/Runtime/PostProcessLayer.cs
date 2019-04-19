@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 namespace UnityEngine.Rendering.PostProcessing
 {
 #if UNITY_2017_2_OR_NEWER
-    using XRSettings = UnityEngine.XR.XRSettings;
+	using XRSettings = UnityEngine.XR.XRSettings;
 #elif UNITY_5_6_OR_NEWER
     using XRSettings = UnityEngine.VR.VRSettings;
 #endif
@@ -391,16 +391,16 @@ namespace UnityEngine.Rendering.PostProcessing
 #if UNITY_2018_2_OR_NEWER
             if (!m_Camera.usePhysicalProperties)
 #endif
-                m_Camera.ResetProjectionMatrix();
-            m_Camera.nonJitteredProjectionMatrix = m_Camera.projectionMatrix;
+			//m_Camera.ResetProjectionMatrix();
+			//m_Camera.nonJitteredProjectionMatrix = m_Camera.projectionMatrix;
 
 #if !UNITY_SWITCH
-            if (m_Camera.stereoEnabled)
-            {
-                m_Camera.ResetStereoProjectionMatrices();
-                Shader.SetGlobalFloat(ShaderIDs.RenderViewportScaleFactor, XRSettings.renderViewportScale);
-            }
-            else
+			if (m_Camera.stereoEnabled)
+			{
+				m_Camera.ResetStereoProjectionMatrices();
+				Shader.SetGlobalFloat(ShaderIDs.RenderViewportScaleFactor, XRSettings.renderViewportScale);
+			}
+			else
 #endif
             {
                 Shader.SetGlobalFloat(ShaderIDs.RenderViewportScaleFactor, 1.0f);
@@ -614,15 +614,15 @@ namespace UnityEngine.Rendering.PostProcessing
                 // TAA calls SetProjectionMatrix so if the camera projection mode was physical, it gets set to explicit. So we set it back to physical.
                 if (m_CurrentContext.physicalCamera)   
                     m_Camera.usePhysicalProperties = true;
-                else 
 #endif
-                    m_Camera.ResetProjectionMatrix();
+                //else 
+                //    m_Camera.ResetProjectionMatrix();
 
-                if (m_CurrentContext.stereoActive)
-                {
-                    if (RuntimeUtilities.isSinglePassStereoEnabled || m_Camera.stereoActiveEye == Camera.MonoOrStereoscopicEye.Right)
-                        m_Camera.ResetStereoProjectionMatrices();
-                }
+                //if (m_CurrentContext.stereoActive)
+                //{
+                //    if (RuntimeUtilities.isSinglePassStereoEnabled || m_Camera.stereoActiveEye == Camera.MonoOrStereoscopicEye.Right)
+                //        m_Camera.ResetStereoProjectionMatrices();
+                //}
             }
         }
 
